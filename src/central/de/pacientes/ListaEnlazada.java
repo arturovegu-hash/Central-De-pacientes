@@ -9,14 +9,14 @@ package central.de.pacientes;
  * @author Arturo_Velásquez_G
  */
 public class ListaEnlazada {
-    private Nodo cabeza;
+   private Nodo cabeza;
 
     public ListaEnlazada() {
         this.cabeza = null;
     }
 
-    // Método para agregar un paciente al final de la lista
-    public void agregarPaciente(Paciente paciente) {
+    // Método para agregar un nuevo paciente a la lista
+    public void agregar(Paciente paciente) {
         Nodo nuevoNodo = new Nodo(paciente);
         if (cabeza == null) {
             cabeza = nuevoNodo;
@@ -29,53 +29,16 @@ public class ListaEnlazada {
         }
     }
 
-    // Método para buscar un paciente por ID
-    public Paciente buscarPaciente(String id) {
+    // Método para mostrar todos los pacientes en la lista
+    public void mostrarPacientes() {
+        if (cabeza == null) {
+            System.out.println("No hay pacientes registrados.");
+            return;
+        }
         Nodo actual = cabeza;
         while (actual != null) {
-            if (actual.getPaciente().getId().equals(id)) {
-                return actual.getPaciente();
-            }
+            System.out.println(actual.getPaciente());
             actual = actual.getSiguiente();
         }
-        return null; // Si no se encuentra el paciente
-    }
-
-    // Método para eliminar un paciente por ID
-    public boolean eliminarPaciente(String id) {
-        if (cabeza == null) {
-            return false;
-        }
-
-        if (cabeza.getPaciente().getId().equals(id)) {
-            cabeza = cabeza.getSiguiente();
-            return true;
-        }
-
-        Nodo actual = cabeza;
-        while (actual.getSiguiente() != null && !actual.getSiguiente().getPaciente().getId().equals(id)) {
-            actual = actual.getSiguiente();
-        }
-
-        if (actual.getSiguiente() != null) {
-            actual.setSiguiente(actual.getSiguiente().getSiguiente());
-            return true;
-        }
-
-        return false;
-    }
-
-    // Método para obtener una representación en String de todos los pacientes
-    public String obtenerPacientes() {
-        StringBuilder sb = new StringBuilder();
-        Nodo actual = cabeza;
-        if (cabeza == null) {
-            return "No hay pacientes registrados.";
-        }
-        while (actual != null) {
-            sb.append(actual.getPaciente().toString()).append("\n");
-            actual = actual.getSiguiente();
-        }
-        return sb.toString();
     }
 }

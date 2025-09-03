@@ -14,16 +14,11 @@ public class Nodo {
 
     public Nodo(Paciente paciente) {
         this.paciente = paciente;
-        this.siguiente = null; // Inicialmente, no apunta a ningún otro nodo
+        this.siguiente = null;
     }
 
-    // Getters y Setters
     public Paciente getPaciente() {
         return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
     }
 
     public Nodo getSiguiente() {

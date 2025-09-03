@@ -9,53 +9,31 @@ package central.de.pacientes;
  * @author Arturo_Velásquez_G
  */
 public class Paciente {
-    private String id;
     private String nombre;
-    private int edad;
+    private String cedula;
     private String clinica;
 
-    public Paciente(String id, String nombre, int edad, String clinica) {
-        this.id = id;
+    public Paciente(String nombre, String cedula, String clinica) {
         this.nombre = nombre;
-        this.edad = edad;
+        this.cedula = cedula;
         this.clinica = clinica;
     }
 
-    // Getters y Setters
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    // Métodos getters para acceder a los atributos del paciente
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public String getCedula() {
+        return cedula;
     }
 
     public String getClinica() {
         return clinica;
     }
 
-    public void setClinica(String clinica) {
-        this.clinica = clinica;
-    }
-
     @Override
     public String toString() {
-        return "ID: " + id + ", Nombre: " + nombre + ", Edad: " + edad + ", Clínica: " + clinica;
+        return "Nombre: " + nombre + ", Cédula: " + cedula + ", Clínica: " + clinica;
     }
 }
