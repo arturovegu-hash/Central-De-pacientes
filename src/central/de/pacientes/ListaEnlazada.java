@@ -9,45 +9,51 @@ package central.de.pacientes;
  * @author Arturo_Velásquez_G
  */
 public class ListaEnlazada {
-    private Paciente cabeza;
+    private Nodo cabeza;
 
     public ListaEnlazada() {
         this.cabeza = null;
     }
 
-    /**
-     * Agrega un nuevo paciente al final de la lista.
-     * @param paciente El objeto Paciente a agregar.
-     */
+    // Método para agregar un paciente al final de la lista
     public void agregarPaciente(Paciente paciente) {
+        Nodo nuevoNodo = new Nodo(paciente);
         if (cabeza == null) {
-            cabeza = paciente;
+            cabeza = nuevoNodo;
         } else {
-            Paciente actual = cabeza;
+            Nodo actual = cabeza;
             while (actual.getSiguiente() != null) {
                 actual = actual.getSiguiente();
             }
-            actual.setSiguiente(paciente);
+            actual.setSiguiente(nuevoNodo);
         }
     }
 
-    /**
-     * Elimina un paciente de la lista por su identificación.
-     * @param identificacion La identificación del paciente a eliminar.
-     * @return true si el paciente fue eliminado, false si no se encontró.
-     */
-    public boolean eliminarPaciente(String identificacion) {
+    // Método para buscar un paciente por ID
+    public Paciente buscarPaciente(String id) {
+        Nodo actual = cabeza;
+        while (actual != null) {
+            if (actual.getPaciente().getId().equals(id)) {
+                return actual.getPaciente();
+            }
+            actual = actual.getSiguiente();
+        }
+        return null; // Si no se encuentra el paciente
+    }
+
+    // Método para eliminar un paciente por ID
+    public boolean eliminarPaciente(String id) {
         if (cabeza == null) {
             return false;
         }
 
-        if (cabeza.getIdentificacion().equals(identificacion)) {
+        if (cabeza.getPaciente().getId().equals(id)) {
             cabeza = cabeza.getSiguiente();
             return true;
         }
 
-        Paciente actual = cabeza;
-        while (actual.getSiguiente() != null && !actual.getSiguiente().getIdentificacion().equals(identificacion)) {
+        Nodo actual = cabeza;
+        while (actual.getSiguiente() != null && !actual.getSiguiente().getPaciente().getId().equals(id)) {
             actual = actual.getSiguiente();
         }
 
@@ -55,40 +61,21 @@ public class ListaEnlazada {
             actual.setSiguiente(actual.getSiguiente().getSiguiente());
             return true;
         }
+
         return false;
     }
 
-    /**
-     * Muestra todos los pacientes en la lista.
-     */
-    public void mostrarPacientes() {
+    // Método para obtener una representación en String de todos los pacientes
+    public String obtenerPacientes() {
+        StringBuilder sb = new StringBuilder();
+        Nodo actual = cabeza;
         if (cabeza == null) {
-            System.out.println("No hay pacientes registrados.");
-            return;
+            return "No hay pacientes registrados.";
         }
-        
-        Paciente actual = cabeza;
-        System.out.println("--- Lista de Pacientes ---");
         while (actual != null) {
-            System.out.println("Nombre: " + actual.getNombre() + ", ID: " + actual.getIdentificacion() + ", Clínica: " + actual.getClinica());
+            sb.append(actual.getPaciente().toString()).append("\n");
             actual = actual.getSiguiente();
         }
-        System.out.println("-------------------------");
-    }
-    
-    /**
-     * Busca un paciente por su identificación.
-     * @param identificacion La identificación del paciente a buscar.
-     * @return El objeto Paciente si se encuentra, o null si no.
-     */
-    public Paciente buscarPaciente(String identificacion) {
-        Paciente actual = cabeza;
-        while (actual != null) {
-            if (actual.getIdentificacion().equals(identificacion)) {
-                return actual;
-            }
-            actual = actual.getSiguiente();
-        }
-        return null;
+        return sb.toString();
     }
 }

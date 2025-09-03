@@ -9,19 +9,27 @@ package central.de.pacientes;
  * @author Arturo_Velásquez_G
  */
 public class Paciente {
+    private String id;
     private String nombre;
-    private String identificacion;
+    private int edad;
     private String clinica;
-    private Paciente siguiente;
 
-    public Paciente(String nombre, String identificacion, String clinica) {
+    public Paciente(String id, String nombre, int edad, String clinica) {
+        this.id = id;
         this.nombre = nombre;
-        this.identificacion = identificacion;
+        this.edad = edad;
         this.clinica = clinica;
-        this.siguiente = null;
     }
 
     // Getters y Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -30,12 +38,12 @@ public class Paciente {
         this.nombre = nombre;
     }
 
-    public String getIdentificacion() {
-        return identificacion;
+    public int getEdad() {
+        return edad;
     }
 
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
     public String getClinica() {
@@ -46,11 +54,8 @@ public class Paciente {
         this.clinica = clinica;
     }
 
-    public Paciente getSiguiente() {
-        return siguiente;
-    }
-
-    public void setSiguiente(Paciente siguiente) {
-        this.siguiente = siguiente;
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Nombre: " + nombre + ", Edad: " + edad + ", Clínica: " + clinica;
     }
 }
